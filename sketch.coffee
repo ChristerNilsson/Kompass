@@ -10,8 +10,10 @@ requestPermission = ->
 
 startCompass = ->
 	window.addEventListener 'deviceorientation', (event) ->
-		alpha = event.alpha
-		document.getElementById('output').innerText = "Kompassriktning: #{Math.round(alpha)}°" if alpha?
+		alpha = event?.webkitCompassHeading ? event?.alpha
+		if alpha?
+			document.getElementById('output').innerText = "Kompassriktning: #{Math.round(alpha)}°"
+		else	
+			document.getElementById('output').innerText = "Ingenkompassdata tillgängling"
 
-document.getElementById('startBtn').addEventListener 'click', ->
-	requestPermission()
+document.getElementById('startBtn').addEventListener 'click', -> requestPermission()
