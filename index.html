@@ -1,44 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Kompass</title>
+  <meta charset="UTF-8">
+  <title>GPS-pil mot mål</title>
+  <style>
+    #arrow {
+      width: 100px;
+      height: 100px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Red_Arrow_Up.svg/120px-Red_Arrow_Up.svg.png') no-repeat center;
+      background-size: contain;
+      transform-origin: center center;
+      transition: transform 0.2s ease;
+      margin: 50px auto;
+    }
+    body {
+      text-align: center;
+      font-family: sans-serif;
+    }
+  </style>
 </head>
-
-<script type="text/javascript">
-	const requestPermission = function() {
-		console.log("requestPermission")
-	if (typeof (typeof DeviceOrientationEvent !== "undefined" && DeviceOrientationEvent !== null ? DeviceOrientationEvent.requestPermission : void 0) === 'function') {
-		return DeviceOrientationEvent.requestPermission().then(function(response) {
-		if (response === 'granted') {
-			console.log("requestPermission ok")
-			return startCompass();
-		} else {
-			console.log("requestPermission nix")
-			return document.getElementById('output').innerText = "Tillgång nekades.";
-		}
-		});
-	} else {
-		return startCompass();
-	}
-	};
-
-	const startCompass = function() {
-		console.log("startCompass")
-		return window.addEventListener('deviceorientation', function(event) {
-		var alpha;
-		alpha = event.alpha;
-		if (alpha != null) {
-		return document.getElementById('output').innerText = `Kompassriktning: ${Math.round(alpha)}°`;
-		}
-	});
-	};
-
-  </script>
-
 <body>
-  <h1>Kompassriktning (alpha)</h1>
-  <button onclick="requestPermission()">Starta</button>
-  <p id="output">Version 1. Tryck på knappen för att starta.</p>
+  <h1>Pil mot mål</h1>
+  <p>Rör dig så att riktning kan beräknas.</p>
+  <div id="arrow"></div>
+  <p id="debug"></p>
+
+  <script src="sketch.js">
+  </script>
 </body>
 </html>
