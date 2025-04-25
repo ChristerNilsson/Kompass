@@ -1,7 +1,8 @@
 
-# Målkoordinater (t.ex. Stockholm)
-targetLat = 59.3293
-targetLon = 18.0686
+# Målkoordinater (t.ex. Brandparken)
+targetLat = 59.266338
+targetLon = 18.131969
+
 previousPosition = null
 
 toRadians = (deg) -> deg * Math.PI / 180
@@ -23,7 +24,7 @@ f = (position) ->
 	{latitude, longitude} = position.coords
 
 	if previousPosition?
-		movementBearing = calculateBearing previousPosition.latitude, previousPosition.longitude,latitude, longitude
+		movementBearing = calculateBearing previousPosition.latitude, previousPosition.longitude, latitude, longitude
 		targetBearing = calculateBearing latitude, longitude, targetLat, targetLon
 		relativeBearing = (targetBearing - movementBearing + 360) % 360
 		updateArrow relativeBearing
